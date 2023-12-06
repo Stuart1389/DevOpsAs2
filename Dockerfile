@@ -5,7 +5,7 @@ FROM node:14
 COPY webApp/ .
 
 # Expose the port on which the app runs
-EXPOSE 8080
+EXPOSE 8090
 
 # Command to run the application
 CMD ["node", "server.js"]
