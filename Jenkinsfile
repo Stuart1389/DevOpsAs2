@@ -27,10 +27,10 @@ pipeline {
 
         }
         
-                stage('Test container'){
+          stage('Test container'){
             steps{
                 script{
-                      //creating container from image
+                      //copying content from server.js
                       sh "wget http://100.27.13.168:8090"
                       sh "cat index.html"
                 }
@@ -38,6 +38,18 @@ pipeline {
             }
 
         }
+
+        stage('push image'){
+            steps{
+                script{
+                      //push image to dockerhub
+                        
+                }
+
+            }
+
+        }      
+        
         
         stage('Clean up'){
             steps{
