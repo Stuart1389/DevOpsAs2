@@ -7,11 +7,19 @@ pipeline {
                 checkout scm
             }
         }
-        stage('build'){
-        	steps{
-        	        def customImage = docker.build("jsdock:${env.BUILD_ID}")      	    
-        	}           
-        }
 
+        stage('Build') {
+            steps {
+                script {
+                    // Use 'script' block to execute multiple steps
+                    node {
+
+                        // Build Docker image
+                        def customImage = docker.build("my-image:${env.BUILD_ID}", "-f .")
+
+                    }
+                }
+            }
+        }
     }
 }
