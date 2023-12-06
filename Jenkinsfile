@@ -43,7 +43,7 @@ pipeline {
             steps{
                 script{
                       //push image to dockerhub
-                      echo 'Hello, world!'  
+                      sh "docker push stuart1389/jsdockTest${env.BUILD_ID}"
                 }
 
             }
