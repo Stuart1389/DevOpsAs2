@@ -15,7 +15,7 @@ pipeline {
                     node {
 
                         // Build Docker image
-                        def customImage = docker.build("my-image:${env.BUILD_ID}", "-f .")
+                        def customImage = docker.build("jsdock:${env.BUILD_ID}")
 
                     }
                 }
