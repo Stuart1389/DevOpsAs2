@@ -25,6 +25,17 @@ pipeline {
             }
 
         }
+        stage('Clean up'){
+            steps{
+                script{
+                    sh "docker stop ${containerId}"
+                    sh "docker rm ${containerId}"
+                }
+
+            }
+
+        }
+
 
     }
 }
