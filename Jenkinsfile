@@ -11,23 +11,38 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                        //building from docker file
+                        //building image from docker file
                         def customImage = docker.build("jsdock:${env.BUILD_ID}")                              
                 }
             }
         }
-        stage('Test'){
+        stage('Create container'){
             steps{
                 script{
+                      //creating container from image
                       def containerId = docker.image("jsdock:${env.BUILD_ID}") .run("-p 8090:8090 --name jsdockTest${env.BUILD_ID}")  
                 }
 
             }
 
         }
+        
+                stage('Test container'){
+            steps{
+                script{
+                      //creating container from image
+                      sh "wget http://100.27.13.168:8090"
+                      sh "cat index.html"
+                }
+
+            }
+
+        }
+        
         stage('Clean up'){
             steps{
                 script{
+                    //stopping and removing container
                     sh "docker stop jsdockTest${env.BUILD_ID}"
                     sh "docker rm jsdockTest${env.BUILD_ID}"
                 }
