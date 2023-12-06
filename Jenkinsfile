@@ -43,7 +43,7 @@ pipeline {
             steps{
                 script{
                       //push image to dockerhub
-                        
+                      echo 'Hello, world!'  
                 }
 
             }
