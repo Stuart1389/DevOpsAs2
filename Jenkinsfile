@@ -28,14 +28,12 @@ pipeline {
         stage('Clean up'){
             steps{
                 script{
-                    sh "docker stop ${containerId}"
-                    sh "docker rm ${containerId}"
+                    sh "docker stop jsdockTest${env.BUILD_ID}"
+                    sh "docker rm jsdockTest${env.BUILD_ID}"
                 }
 
             }
 
         }
-
-
     }
 }
