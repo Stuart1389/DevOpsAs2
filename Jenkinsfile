@@ -12,12 +12,9 @@ pipeline {
             steps {
                 script {
                     // Use 'script' block to execute multiple steps
-                    node {
-
                         // Build Docker image
                         def customImage = docker.build("jsdock:${env.BUILD_ID}")
-
-                    }
+       
                 }
             }
         }
