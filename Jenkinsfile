@@ -19,7 +19,7 @@ pipeline {
         stage('Test'){
             steps{
                 script{
-                      def containerId = docker.image("jsdock:${env.BUILD_ID}") .run("-p 8090:80 --name jsdockTest:${env.BUILD_ID}")  
+                      def containerId = docker.image("jsdock:${env.BUILD_ID}") .run("-p 8090:80 --name jsdockTest${env.BUILD_ID}")  
                 }
 
             }
