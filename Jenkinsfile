@@ -43,7 +43,10 @@ pipeline {
             steps{
                 script{
                       //push image to dockerhub
-                      sh "docker push jsdock:${env.BUILD_ID}"
+                      withCredentials([usernamePassword(username: 'stuart1389', password: '15stustu15')]) {
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"                                                                                                                                         
+                                                                                                                                                             }
+
                 }
 
             }
