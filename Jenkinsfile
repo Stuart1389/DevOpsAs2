@@ -36,6 +36,8 @@ pipeline {
                       echo 'Testing container'
                       sh "wget http://52.91.144.228:8090/"
                       sh "cat index.html"
+                      echo 'ls inside container'
+                      sh 'docker exec jsdockTest${env.BUILD_ID} ls'
                 }
 
             }
