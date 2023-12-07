@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                         //building image from docker file
-                        def customImage = docker.build("jsdock:${env.BUILD_ID}")
+                        def customImage = docker.build("stuart1389/jsdock:${env.BUILD_ID}")
                 }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps{
                 script{
                       //creating container from image
-                      def containerId = docker.image("stuart1389/jsdock:${env.BUILD_ID}") .run("-p 8090:8090 --name jsdockTest${env.BUILD_ID}")
+                      def containerId = docker.image("jsdock:${env.BUILD_ID}") .run("-p 8090:8090 --name jsdockTest${env.BUILD_ID}")
                 }
 
             }
@@ -73,3 +73,4 @@ pipeline {
         }
     }
 }
+
