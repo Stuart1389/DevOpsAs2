@@ -41,6 +41,6 @@
     shell: |
       minikube start
       kubectl create deployment jsdock --image=stuart1389/jsdock:v1
-      kubectl expose deployment/jsdock --type="NodePort" --port 8080 --name jsdock-service
+      kubectl expose deployment/jsdock --type="NodePort" --port 8090 --name jsdock-service
       kubectl scale deployments/jsdock --replicas=12
     register: command_output
