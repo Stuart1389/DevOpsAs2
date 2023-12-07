@@ -69,12 +69,13 @@ pipeline {
         stage('Kubernetes'){
             steps{
                 script{
-                      echo "Pushing image to dockerhub"
+                      echo "Deploying updated image to kubernetes"
                 }
                 sshagent(['ewSSH']){
                 //ssh into production server
                     sh "ssh ubuntu@54.204.209.24"
-                    sh "ls"
+                    //get image from dockerhub using build id
+                    sh "kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}"
                 }
 
 
