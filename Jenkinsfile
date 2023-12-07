@@ -43,9 +43,9 @@ pipeline {
             steps{
                 script{
                       //push image to dockerhub
-                      withCredentials([usernamePassword(username: 'stuart1389', password: '15stustu15')]) {
-                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"                                                                                                                                         
-                                                                                                                                                             }
+                      withCredentials([usernamePassword(credentialsId: 'theHub')]) {
+                        sh "docker login -u $USERNAME -p $PASSWORD"                                                                                                                                         
+                  }
 
                 }
 
