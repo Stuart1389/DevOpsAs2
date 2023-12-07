@@ -73,9 +73,9 @@ pipeline {
                 }
                 sshagent(['ewSSH']){
                 //ssh into production server
-                    sh "ssh ubuntu@54.204.209.24"
+                    sh "ssh ubuntu@3.83.148.121"
                     //get image from dockerhub using build id
-                    sh "ssh ubuntu@54.204.209.24 'kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}'"
+                    sh "ssh ubuntu@3.83.148.121 'kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}'"
                 }
 
 
