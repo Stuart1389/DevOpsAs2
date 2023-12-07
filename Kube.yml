@@ -40,7 +40,7 @@
     become: no
     shell: |
       minikube start
-      kubectl create deployment jsdock --image=stuart1389/jsdock:v64
+      kubectl create deployment jsdock --image=stuart1389/jsdock:64
       kubectl expose deployment/jsdock --type="NodePort" --port 8090 --name jsdock-service
       kubectl scale deployments/jsdock --replicas=12
     register: command_output
