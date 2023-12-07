@@ -50,7 +50,7 @@ pipeline {
                       echo "Pushing image to dockerhub"
                       //logging into docker
                       withCredentials([usernamePassword(credentialsId: 'theHub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPass')]) {
-                        sh "docker login -u $dockerUser --password-stdin $dockerPass"
+                        sh "docker login -u $dockerUser -p $dockerPass"
                         
                         //pushing docker image
                         sh "docker push stuart1389/jsdock:${env.BUILD_ID}"
