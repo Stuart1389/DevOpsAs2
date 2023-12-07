@@ -34,7 +34,7 @@ pipeline {
                 script{
                       //copying content from server.js
                       echo 'Testing container'
-                      sh "wget http://52.91.144.228:8090/"
+                      sh "wget http://54.162.102.237:8090/"
                       sh "cat index.html"
                       echo "ls inside container"
                       sh "docker exec jsdockTest${env.BUILD_ID} ls"
@@ -66,7 +66,7 @@ pipeline {
         }
         
         
-                stage('Kubernetes'){
+        stage('Kubernetes'){
             steps{
                 script{
                       echo "Pushing image to dockerhub"
