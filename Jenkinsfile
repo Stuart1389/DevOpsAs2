@@ -34,7 +34,7 @@ pipeline {
                 script{
                       //copying content from server.js
                       echo 'Testing container'
-                      sh "wget http://54.162.102.237:8090/"
+                      sh "wget http://54.175.179.101:8090/"
                       sh "cat index.html"
                       echo "ls inside container"
                       sh "docker exec jsdockTest${env.BUILD_ID} ls"
