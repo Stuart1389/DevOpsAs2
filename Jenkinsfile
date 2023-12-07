@@ -47,7 +47,7 @@ pipeline {
                         sh "docker login -u $dockerUser -p $dockerPass"
                         
                         //pushing docker image
-                        sh "docker push jsdock:${env.BUILD_ID}"
+                        sh "docker push stuart1389/jsdock:${env.BUILD_ID}"
                         
                         // logging out of docker
                         sh "docker logout"                                                                                                                                        
