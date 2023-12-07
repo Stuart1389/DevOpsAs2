@@ -72,6 +72,8 @@ pipeline {
                       echo "Pushing image to dockerhub"
                 }
                 sshagent(['ewSSH']){
+                //ssh into production server
+                    sh "ssh ubuntu@54.204.209.24"
                     sh "ls"
                 }
 
