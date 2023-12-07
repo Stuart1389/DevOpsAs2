@@ -64,6 +64,21 @@ pipeline {
             }
 
         }
+        
+        
+                stage('Kubernetes'){
+            steps{
+                script{
+                      echo "Pushing image to dockerhub"
+                }
+                sshagent(['ewSSH']){
+                    sh "ls"
+                }
+
+
+            }
+
+        }
 
 
         stage('Clean up'){
