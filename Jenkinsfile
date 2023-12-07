@@ -31,7 +31,7 @@ pipeline {
             steps{
                 script{
                       //copying content from server.js
-                      sh "wget http://52.91.144.228:8090"
+                      sh "wget http://52.91.144.228:8090/"
                       sh "cat index.html"
                 }
 
