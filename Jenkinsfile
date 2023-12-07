@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                         //building image from docker file
+                        echo 'Creating image from dockerfile'
                         def customImage = docker.build("stuart1389/jsdock:${env.BUILD_ID}")
                 }
             }
@@ -20,6 +21,7 @@ pipeline {
             steps{
                 script{
                       //creating container from image
+                      echo 'Creating container from image'
                       def containerId = docker.image("stuart1389/jsdock:${env.BUILD_ID}") .run("-p 8090:8090 --name jsdockTest${env.BUILD_ID}")
                 }
 
@@ -31,6 +33,7 @@ pipeline {
             steps{
                 script{
                       //copying content from server.js
+                      echo 'Testing container'
                       sh "wget http://52.91.144.228:8090/"
                       sh "cat index.html"
                 }
@@ -42,6 +45,7 @@ pipeline {
         stage('push image'){
             steps{
                 script{
+                      echo 'Pushing image to dockerhub'
                       //logging into docker
                       withCredentials([usernamePassword(credentialsId: 'theHub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPass')]) {
                         sh "docker login -u $dockerUser -p $dockerPass"
@@ -63,6 +67,7 @@ pipeline {
         stage('Clean up'){
             steps{
                 script{
+                    echo 'stopping and removing container'
                     //stopping and removing container
                     sh "docker stop jsdockTest${env.BUILD_ID}"
                     sh "docker rm jsdockTest${env.BUILD_ID}"
