@@ -75,7 +75,7 @@ pipeline {
                 //ssh into production server
                     sh "ssh ubuntu@54.204.209.24"
                     //get image from dockerhub using build id
-                    sh "kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}"
+                    sh "ssh ubuntu@54.204.209.24 'kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}'"
                 }
 
 
