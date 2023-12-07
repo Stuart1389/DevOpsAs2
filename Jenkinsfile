@@ -42,9 +42,15 @@ pipeline {
         stage('push image'){
             steps{
                 script{
-                      //push image to dockerhub
+                      //logging into docker
                       withCredentials([usernamePassword(credentialsId: 'theHub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPass')]) {
-                        sh "docker login -u $dockerUser -p $dockerPass"                                                                                                                                        
+                        sh "docker login -u $dockerUser -p $dockerPass"
+                        
+                        //pushing docker image
+                        sh "docker push jsdock:${env.BUILD_ID}"
+                        
+                        // logging out of docker
+                        sh "docker logout"                                                                                                                                        
                   }
 
                 }
@@ -67,4 +73,3 @@ pipeline {
         }
     }
 }
-
