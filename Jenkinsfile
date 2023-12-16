@@ -18,9 +18,7 @@ pipeline {
                 script {
                         //building image from docker file
                         echo "!!Creating image from dockerfile"
-            docker.withRegistry('https://registry.hub.docker.com', 'b9b79325-f0ee-4cbf-8fbd-6e9a5ec2be94'){
                 def Image = docker.build("${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
-                }
             }
         }
         }
