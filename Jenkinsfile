@@ -23,6 +23,7 @@ pipeline {
                 }
             }
         }
+        }
         stage('Create container'){
             steps{
                 script{
