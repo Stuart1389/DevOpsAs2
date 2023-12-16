@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                         //building image from docker file
-                        echo "Creating image from dockerfile"
+                        echo "!!Creating image from dockerfile"
                         def customImage = docker.build("stuart1389/jsdock:${env.BUILD_ID}")
                 }
             }
@@ -21,7 +21,7 @@ pipeline {
             steps{
                 script{
                       //creating container from image
-                      echo "Creating container from image"
+                      echo "!!Creating container from image"
                       def containerId = docker.image("stuart1389/jsdock:${env.BUILD_ID}") .run("-p 8090:8090 --name jsdockTest${env.BUILD_ID}")
                 }
 
@@ -33,7 +33,7 @@ pipeline {
             steps{
                 script{
                       //copying content from server.js
-                      echo 'Testing container'
+                      echo '!!Testing container'
                       sh "wget http://54.175.179.101:8090/"
                       sh "cat index.html"
                       echo "ls inside container"
@@ -47,7 +47,7 @@ pipeline {
         stage('push image'){
             steps{
                 script{
-                      echo "Pushing image to dockerhub"
+                      echo "!!Pushing image to dockerhub"
                       //logging into docker
                       withCredentials([usernamePassword(credentialsId: 'theHub', usernameVariable: 'dockerUser', passwordVariable: 'dockerPass')]) {
                         sh "docker login -u $dockerUser -p $dockerPass"
@@ -73,8 +73,10 @@ pipeline {
                 }
                 sshagent(['ewSSH']){
                 //ssh into production server
+                    sh "ssh ubuntu@18.210.15.38"
+                    sh "ls"
                     //get image from dockerhub using build id
-                    sh "ssh ubuntu@3.83.148.121 'kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}'"
+                    sh "ssh ubuntu@18.210.15.38 'kubectl set image deployment/jsdock jsdock=stuart1389/jsdock:${env.BUILD_ID}'"
                 }
 
 
@@ -86,7 +88,7 @@ pipeline {
         stage('Clean up'){
             steps{
                 script{
-                    echo "stopping and removing container"
+                    echo "!!stopping and removing container"
                     //stopping and removing container
                     sh "docker stop jsdockTest${env.BUILD_ID}"
                     sh "docker rm jsdockTest${env.BUILD_ID}"
