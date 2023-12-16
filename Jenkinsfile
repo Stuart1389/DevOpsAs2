@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        // Define environment variables as needed
+        DOCKER_HUB_REPO = 'stuart1389/jsdock'      
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -13,7 +18,8 @@ pipeline {
                 script {
                         //building image from docker file
                         echo "!!Creating image from dockerfile"
-                        def customImage = docker.build("stuart1389/jsdock:${env.BUILD_ID}")
+            docker.withRegistry('https://registry.hub.docker.com', 'b9b79325-f0ee-4cbf-8fbd-6e9a5ec2be94'){
+                def Image = docker.build("${DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
                 }
             }
         }
